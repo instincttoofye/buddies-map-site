@@ -309,6 +309,21 @@ select {
   color: #FFF;
 }
 
+ .form-sublabel {
+  width: 100%;
+  text-align: left;
+
+  font-family: "GoodTimes", sans-serif !important;
+  font-size: 8px;
+
+  line-height: 1;
+
+  color: #999 !important;
+
+  filter: drop-shadow(0 2 4 #1a1a1a);
+}
+
+
 .form-field input {
   width: 100%;
   height: 42px;
@@ -656,7 +671,8 @@ select {
   
       color: #FFF;
     }
-  
+
+
     .form-field input {
       width: 100%;
       height: 42px;
