@@ -109,7 +109,7 @@ const MapCards = ({ onUserCreated }) => {
                                 </label>
 
                                 <div className="form-sublabel">
-                                    @name no spaces
+                                    @name not display name
                                 </div>
 
                                 <input
