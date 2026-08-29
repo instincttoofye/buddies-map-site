@@ -1,20 +1,16 @@
 pub fn normalize_discord_username(
     username: &str,
 ) -> String {
-    let normalized_punctuation: String = username
+    username
         .trim()
         .chars()
-        .map(|character| {
+        .filter_map(|character| {
             match character {
-                '’' | '‘' | '`' | '´' => '\'',
-                _ => character,
+                '’' | '‘' | '`' | '´' => Some('\''),
+                character if character.is_whitespace() => None,
+                _ => Some(character),
             }
         })
-        .collect();
-
-    normalized_punctuation
-        .split_whitespace()
-        .collect::<Vec<_>>()
-        .join(" ")
+        .collect::<String>()
         .to_lowercase()
 }
