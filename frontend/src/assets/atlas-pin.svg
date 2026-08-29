@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299.6371 539.6369">
+  <defs>
+    <style>
+      .cls-outline {
+        fill: none;
+        stroke: #e50000;
+        stroke-linejoin: round;
+        stroke-width: 36px;
+      }
+
+      .cls-1 {
+        fill: none;
+        stroke: #FFD700;
+        stroke-linejoin: round;
+        stroke-width: 10px;
+      }
+    </style>
+  </defs>
+
+  <g id="Layer_1-2" data-name="Layer 1">
+
+    <!-- WHITE OUTLINE LAYER -->
+    <g>
+      <g>
+        <polygon
+          class="cls-outline"
+          points="5 269.8185 149.8185 534.6369 149.8184 5 5 269.8185"
+        />
+
+        <polygon
+          class="cls-outline"
+          points="149.8187 5 149.8185 534.6369 294.6371 269.8185 149.8187 5"
+        />
+      </g>
+
+      <polyline
+        class="cls-outline"
+        points="5 269.8185 148.838 300.2106 294.6371 269.8185"
+      />
+
+      <path
+        class="cls-outline"
+        d="M149.8185,133.6705c28.6971,0,51.9607,23.2636,51.9607,51.9607s-23.2636,51.9607-51.9607,51.9607"
+      />
+    </g>
+
+    <!-- YELLOW PIN LAYER -->
+    <g>
+      <g>
+        <polygon
+          class="cls-1"
+          points="5 269.8185 149.8185 534.6369 149.8184 5 5 269.8185"
+        />
+
+        <polygon
+          class="cls-1"
+          points="149.8187 5 149.8185 534.6369 294.6371 269.8185 149.8187 5"
+        />
+      </g>
+
+      <polyline
+        class="cls-1"
+        points="5 269.8185 148.838 300.2106 294.6371 269.8185"
+      />
+
+      <path
+        class="cls-1"
+        d="M149.8185,133.6705c28.6971,0,51.9607,23.2636,51.9607,51.9607s-23.2636,51.9607-51.9607,51.9607"
+      />
+    </g>
+
+  </g>
+</svg>

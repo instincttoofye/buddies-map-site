@@ -1,0 +1,700 @@
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: auto;
+  background: #090726;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+@font-face {
+  font-family: "GoodTimes";
+  src: url("./assets/fonts/GoodTimesRg.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.map-page {
+  width: 100%;
+  min-width: 1200px;
+  min-height: max(100vh, 1200px);
+
+  padding-top: 70px;
+  box-sizing: border-box;
+
+  background-image: url("./assets/BG_2.jpg");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+}
+
+.world-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.map-visual {
+  position: relative;
+  width: 100%;
+}
+
+.map-pin {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.map-pin-icon {
+  display: block;
+  width: 24px;
+  height: auto;
+
+  transform: translateY(-100%);
+
+  filter: drop-shadow(0 0 5px #000);
+}
+
+.map-pin-label {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  white-space: nowrap;
+
+  font-family: "GoodTimes", sans-serif;
+  font-size: 6px;
+  color: #FFD700;
+
+  filter: drop-shadow(0 0 2px #000);
+}
+
+.map-header {
+  position: relative;
+
+  width: 100%;
+  height: 155px;
+
+  /*margin-top: 70px;*/
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(255, 255, 255, 0.88);
+
+  font-family: "GoodTimes", sans-serif;
+  color: #000;
+}
+
+.map-header-logo {
+  position: absolute;
+
+  left: 40px;
+  top: 50%;
+
+  width: 190px;
+  height: 190px;
+
+  transform: translateY(-50%);
+
+  z-index: 2;
+}
+
+.map-header-title {
+  margin: 0;
+
+  font-family: "GoodTimes", sans-serif;
+  font-size: 64px;
+  font-weight: normal;
+
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.map-cards {
+  position: absolute;
+
+  left: 0;
+  top: 370px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  z-index: 5;
+}
+
+
+/* =========================
+   COUNTER CARD
+   ========================= */
+
+   .counter-card-border,
+   .main-card-border {
+     position: relative;
+   
+     border-radius: 20px;
+   
+     background: transparent;
+   }
+   
+   .counter-card-border {
+     width: 257px;
+     height: 124px;
+   }
+   
+   .main-card-border {
+     width: 410px;
+     height: 453px;
+   }
+   
+   .counter-card-border::before,
+   .main-card-border::before {
+     content: "";
+   
+     position: absolute;
+     inset: 0;
+   
+     padding: 4px;
+   
+     border-radius: 20px;
+   
+     background: linear-gradient(
+       180deg,
+       #cf26ff 0%,
+       #43c19a 100%
+     );
+   
+     -webkit-mask:
+       linear-gradient(#fff 0 0) content-box,
+       linear-gradient(#fff 0 0);
+   
+     -webkit-mask-composite: xor;
+     mask-composite: exclude;
+   
+     pointer-events: none;
+   }
+   
+   .counter-card,
+   .main-card {
+     width: 100%;
+     height: 100%;
+   
+     border-radius: 20px;
+   
+     background: transparent;
+   }
+
+   .counter-card {
+    width: 100%;
+    height: 100%;
+  
+    box-sizing: border-box;
+    border-radius: 20px;
+  
+    background: transparent;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    overflow: hidden;
+  }
+  
+  .counter-label {
+    font-family: "GoodTimes", sans-serif;
+    font-size: 14px;
+    line-height: 1;
+  
+    color: #FFF;
+  
+    margin: 0 0 4px 0;
+    padding: 0;
+    filter: drop-shadow(0 0 2 8px #000);
+  }
+  
+  .counter-value {
+    font-family: "GoodTimes", sans-serif;
+    font-size: 72px;
+    line-height: 0.8;
+  
+    color: #FFF;
+  
+    margin: 0;
+    padding: 0;
+    filter: drop-shadow(0 0 2 8px #000);
+  }
+/* =========================
+   MAIN CARD
+   ========================= */
+   .main-card {
+    width: 100%;
+    height: 100%;
+  
+    box-sizing: border-box;
+  
+    padding: 18px 20px;
+  
+    border-radius: 20px;
+  
+    background: transparent;
+  }
+
+.form-title {
+  margin: 0 0 20px 0;
+
+  font-family: "GoodTimes", sans-serif;
+  font-size: 26px;
+  font-weight: normal;
+  line-height: 1;
+
+  color: #FFF;
+}
+
+.location-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.form-field label {
+  font-family: "GoodTimes", sans-serif;
+  font-size: 18px;
+  line-height: 1;
+
+  color: #FFF;
+}
+
+.form-field input {
+  width: 100%;
+  height: 42px;
+
+  box-sizing: border-box;
+
+  padding: 0 14px;
+
+  border: none;
+  border-radius: 20px;
+
+  outline: none;
+
+  background: #FFF;
+
+  font-family: "GoodTimes", sans-serif;
+  font-size: 16px;
+  color: #000;
+}
+
+.form-field input:focus {
+  outline: 3px solid #cf26ff;
+}
+
+.submit-button {
+  position: absolute;
+
+  left: 20px;
+  bottom: -70px;
+
+  width: calc(100% - 40px);
+  height: 70px;
+
+  border: none;
+  border-radius: 20px;
+
+  background: linear-gradient(
+    90deg,
+    #cf26ff 0%,
+    #43c19a 100%
+  );
+
+  font-family: "GoodTimes", sans-serif;
+  font-size: 42px;
+  line-height: 1;
+
+  color: #FFF;
+
+  cursor: pointer;
+}
+
+.form-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "GoodTimes", sans-serif;
+  font-size: 12.5px;
+
+  color: #e50000;
+  filter: drop-shadow(0 0 0 5 #170000)
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+   @media (max-width: 768px) {
+
+    html,
+    body,
+    #root {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+  
+      margin: 0;
+      padding: 0;
+  
+      overflow-x: hidden;
+    }
+  
+    body {
+      background: #090726;
+    }
+  
+  
+    /* =========================
+       PAGE
+       ========================= */
+  
+    .map-page {
+      width: 100%;
+      min-width: 0;
+      min-height: 100vh;
+  
+      padding-top: 20px;
+  
+      box-sizing: border-box;
+  
+      background-image: url("./assets/BG_2.jpg");
+      background-size: cover;
+      background-position: center top;
+      background-repeat: repeat-y;
+    }
+  
+  
+    /* =========================
+       HEADER
+       ========================= */
+  
+    .map-header {
+      position: relative;
+  
+      width: 100%;
+      height: 100px;
+  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      padding-left: 105px;
+      padding-right: 15px;
+  
+      box-sizing: border-box;
+    }
+  
+    .map-header-logo {
+      position: absolute;
+  
+      left: 10px;
+      top: 50%;
+  
+      width: 110px;
+      height: 110px;
+  
+      transform: translateY(-50%);
+  
+      z-index: 2;
+    }
+  
+    .map-header-title {
+      width: 100%;
+  
+      margin: 0;
+  
+      font-family: "GoodTimes", sans-serif;
+      font-size: clamp(20px, 6vw, 32px);
+      font-weight: normal;
+      line-height: 1;
+  
+      white-space: normal;
+      text-align: center;
+    }
+  
+  
+    /* =========================
+       MAP OUTER CONTAINER
+       ========================= */
+  
+    .map-container {
+      position: relative;
+  
+      width: 100%;
+  
+      margin-top: 30px;
+    }
+  
+  
+    /* =========================
+       MAP + PINS ONLY
+  
+       This wrapper MUST only contain
+       the actual map and its pins.
+       ========================= */
+  
+    .map-visual {
+      position: relative;
+  
+      width: 100%;
+    }
+  
+    .world-map {
+      display: block;
+  
+      width: 100%;
+      height: auto;
+    }
+  
+  
+    /* =========================
+       PINS
+       ========================= */
+  
+    .map-pin {
+      position: absolute;
+  
+      transform: translateX(-50%);
+    }
+  
+    .map-pin-icon {
+      display: block;
+  
+      width: 9px;
+      height: 8px;
+  
+      transform: translateY(-100%);
+  
+      filter: drop-shadow(0 0 3px #000);
+    }
+  
+    .map-pin-label {
+      position: absolute;
+  
+      top: 2px;
+      left: 50%;
+  
+      transform: translateX(-50%);
+  
+      white-space: nowrap;
+  
+      font-family: "GoodTimes", sans-serif;
+      font-size: 2px;
+  
+      color: #FFD700;
+  
+      filter: drop-shadow(0 0 2px #000);
+    }
+  
+  
+    /* =========================
+       CARDS
+       ========================= */
+  
+    .map-cards {
+      position: static;
+  
+      width: 100%;
+  
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  
+      gap: 12px;
+  
+      margin-top: 20px;
+  
+      padding:
+        0
+        16px
+        100px
+        16px;
+  
+      box-sizing: border-box;
+    }
+  
+  
+    /* =========================
+       COUNTER
+       ========================= */
+  
+    .counter-card-border {
+      width: 100%;
+      max-width: 300px;
+  
+      height: 124px;
+    }
+  
+    .counter-label {
+      font-size: 14px;
+    }
+  
+    .counter-value {
+      font-size: 72px;
+    }
+  
+  
+    /* =========================
+       FORM STACK
+       ========================= */
+  
+    .form-card-stack {
+      position: relative;
+  
+      width: 100%;
+      max-width: 410px;
+    }
+  
+    .main-card-border {
+      width: 100%;
+  
+      height: 453px;
+    }
+  
+    .main-card {
+      width: 100%;
+      height: 100%;
+  
+      padding: 18px 20px;
+  
+      box-sizing: border-box;
+    }
+  
+  
+    /* =========================
+       FORM
+       ========================= */
+  
+    .form-title {
+      margin: 0 0 20px 0;
+  
+      font-family: "GoodTimes", sans-serif;
+      font-size: 24px;
+  
+      line-height: 1;
+  
+      color: #FFF;
+    }
+  
+    .location-form {
+      width: 100%;
+  
+      display: flex;
+      flex-direction: column;
+  
+      gap: 16px;
+  
+      font-family: "GoodTimes", sans-serif;
+    }
+  
+    .form-field {
+      width: 100%;
+  
+      display: flex;
+      flex-direction: column;
+  
+      gap: 7px;
+    }
+  
+    .form-field label {
+      font-family: "GoodTimes", sans-serif;
+      font-size: 16px;
+  
+      line-height: 1;
+  
+      color: #FFF;
+    }
+  
+    .form-field input {
+      width: 100%;
+      height: 42px;
+  
+      box-sizing: border-box;
+  
+      padding: 0 14px;
+  
+      border: none;
+      border-radius: 20px;
+  
+      outline: none;
+  
+      background: #FFF;
+  
+      font-family: "GoodTimes", sans-serif;
+      font-size: 16px;
+  
+      color: #000;
+    }
+  
+  
+    /* =========================
+       SUBMIT
+       ========================= */
+  
+    .submit-button {
+      position: absolute;
+  
+      left: 20px;
+      bottom: -70px;
+  
+      width: calc(100% - 40px);
+      height: 70px;
+  
+      border-radius: 20px;
+  
+      font-family: "GoodTimes", sans-serif;
+      font-size: 36px;
+    }
+  }

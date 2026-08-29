@@ -1,0 +1,266 @@
+use axum::{Json, extract::State, http::StatusCode};
+
+use sqlx::PgPool;
+
+use tracing::{error, info};
+
+use crate::models::{map_submission::MapSubmission, map_user::MapUser};
+use crate::utils::normalize::normalize_discord_username;
+
+pub async fn get_map(State(pool): State<PgPool>) -> Result<Json<Vec<MapUser>>, StatusCode> {
+    info!("GET /map - request received");
+
+    let users = sqlx::query_as::<_, MapUser>(
+        r#"
+        SELECT
+            users.id AS user_id,
+            users.discord_username,
+            locations.city,
+            locations.state,
+            locations.country,
+            locations.latitude,
+            locations.longitude
+        FROM users
+        INNER JOIN locations
+            ON locations.user_id = users.id
+        ORDER BY users.discord_username
+        "#,
+    )
+    .fetch_all(&pool)
+    .await
+    .map_err(|error| {
+        error!(
+            error = %error,
+            "GET /map - failed to retrieve map users"
+        );
+
+        StatusCode::INTERNAL_SERVER_ERROR
+    })?;
+
+    info!(
+        user_count = users.len(),
+        "GET /map - successfully retrieved map users"
+    );
+
+    Ok(Json(users))
+}
+
+pub async fn create_map_entry(
+    State(pool): State<PgPool>,
+    Json(payload): Json<MapSubmission>,
+) -> Result<(StatusCode, Json<MapUser>), (StatusCode, String)> {
+    info!("POST /map - request received");
+
+    let discord_username = payload.discord_username.trim();
+    let country = payload.country.trim();
+    let city = payload.city.trim();
+    let normalized_username = normalize_discord_username(discord_username);
+
+    if discord_username.is_empty() {
+        info!("POST /map - rejected request: Discord username is missing");
+
+        return Err((
+            StatusCode::BAD_REQUEST,
+            "Discord username is required".to_string(),
+        ));
+    }
+
+    if country.is_empty() {
+        info!(
+            discord_username = %discord_username,
+            "POST /map - rejected request: country is missing"
+        );
+
+        return Err((StatusCode::BAD_REQUEST, "Country is required".to_string()));
+    }
+
+    if city.is_empty() {
+        info!(
+            discord_username = %discord_username,
+            country = %country,
+            "POST /map - rejected request: city is missing"
+        );
+
+        return Err((StatusCode::BAD_REQUEST, "City is required".to_string()));
+    }
+
+    let state = payload
+        .state
+        .as_deref()
+        .map(str::trim)
+        .filter(|value| !value.is_empty());
+
+    let username_exists = sqlx::query_scalar::<_, bool>(
+        r#"
+        SELECT EXISTS (
+            SELECT 1
+            FROM users
+            WHERE discord_username_normalized = $1
+        )
+        "#,
+    )
+    .bind(&normalized_username)
+    .fetch_one(&pool)
+    .await
+    .map_err(internal_error)?;
+
+    if username_exists {
+        info!(
+            discord_username = %discord_username,
+            nromalized_username = %normalized_username,
+            "POST /map = rejected duplicate Discord username"
+        );
+
+        return Err((
+            StatusCode::CONFLICT,
+            "That Discord user is already on the map"
+            .to_string(),
+        ));
+    }
+
+    info!(
+        discord_username = %discord_username,
+        city = %city,
+        state = ?state,
+        country = %country,
+        "POST /map - attempting geocoding"
+    );
+
+    // Geocode BEFORE creating anything in Postgres.
+    let coordinates = crate::services::geocoder::geocode(city, state, country)
+        .await
+        .map_err(|error| {
+            error!(
+                error = %error,
+                discord_username = %discord_username,
+                city = %city,
+                state = ?state,
+                country = %country,
+                "POST /map - geocoding request failed"
+            );
+
+            (
+                StatusCode::BAD_GATEWAY,
+                "Failed to geocode location".to_string(),
+            )
+        })?
+        .ok_or_else(|| {
+            info!(
+                discord_username = %discord_username,
+                city = %city,
+                state = ?state,
+                country = %country,
+                "POST /map - geocoder returned no matching location"
+            );
+
+            (
+                StatusCode::BAD_REQUEST,
+                "Could not find that location".to_string(),
+            )
+        })?;
+
+    info!(
+        discord_username = %discord_username,
+        latitude = coordinates.latitude,
+        longitude = coordinates.longitude,
+        "POST /map - geocoding successful"
+    );
+
+    let mut transaction = pool.begin().await.map_err(internal_error)?;
+
+    info!(
+        discord_username = %discord_username,
+        "POST /map - database transaction started"
+    );
+
+    let user_id: uuid::Uuid = sqlx::query_scalar(
+        r#"
+        INSERT INTO users (
+            discord_username,
+            discord_username_normalized
+        )
+        VALUES ($1, $2)
+        RETURNING id
+        "#,
+    )
+    .bind(discord_username)
+    .bind(&normalized_username)
+    .fetch_one(&mut *transaction)
+    .await
+    .map_err(internal_error)?;
+
+    info!(
+        user_id = %user_id,
+        discord_username = %discord_username,
+        "POST /map - user created"
+    );
+
+    sqlx::query(
+        r#"
+        INSERT INTO locations (
+            user_id,
+            country,
+            state,
+            city,
+            latitude,
+            longitude
+        )
+        VALUES ($1, $2, $3, $4, $5, $6)
+        "#,
+    )
+    .bind(user_id)
+    .bind(country)
+    .bind(state)
+    .bind(city)
+    .bind(coordinates.latitude)
+    .bind(coordinates.longitude)
+    .execute(&mut *transaction)
+    .await
+    .map_err(internal_error)?;
+
+    info!(
+        user_id = %user_id,
+        city = %city,
+        state = ?state,
+        country = %country,
+        "POST /map - location created"
+    );
+
+    transaction.commit().await.map_err(internal_error)?;
+
+    info!(
+        user_id = %user_id,
+        discord_username = %discord_username,
+        "POST /map - database transaction committed"
+    );
+
+    let created_user = MapUser {
+        user_id,
+        discord_username: Some(discord_username.to_string()),
+        city: Some(city.to_string()),
+        state: state.map(String::from),
+        country: country.to_string(),
+        latitude: Some(coordinates.latitude),
+        longitude: Some(coordinates.longitude),
+    };
+
+    info!(
+        user_id = %user_id,
+        discord_username = %discord_username,
+        "POST /map - map entry successfully created"
+    );
+
+    Ok((StatusCode::CREATED, Json(created_user)))
+}
+
+fn internal_error(error: sqlx::Error) -> (StatusCode, String) {
+    error!(
+        error = %error,
+        "Database operation failed"
+    );
+
+    (
+        StatusCode::INTERNAL_SERVER_ERROR,
+        "Internal server error".to_string(),
+    )
+}
