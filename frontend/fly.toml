@@ -1,0 +1,22 @@
+# fly.toml app configuration file generated for buddies-map-frontend on 2026-08-30T13:06:06-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'buddies-map-frontend'
+primary_region = 'iad'
+
+[build]
+[http_service]
+  internal_port = 80
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 256
