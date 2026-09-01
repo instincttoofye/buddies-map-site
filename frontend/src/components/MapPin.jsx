@@ -1,4 +1,4 @@
-import pinSvg from "../assets/pin-outline.svg";
+import pinSvg from "../assets/base-icon-nms.svg";
 
 const MapPin = ({ x, y, username }) => {
   return (

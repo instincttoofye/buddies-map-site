@@ -1,4 +1,4 @@
-const BASE_URL = "http://24.99.181.92:3010";
+const BASE_URL = "https://buddies-map-backend.fly.dev";
 
 export const getMapUsers = async () => {
   const response = await fetch(`${BASE_URL}/map`);
