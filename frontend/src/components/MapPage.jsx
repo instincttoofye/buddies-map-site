@@ -75,20 +75,125 @@ const MapPage = () => {
         const rect =
           element.getBoundingClientRect();
 
+        const pin =
+          element.closest(".map-pin");
+
+        if (!pin) {
+          return null;
+        }
+
+        const pinRect =
+          pin.getBoundingClientRect();
+
+        const anchorX =
+          pinRect.left + pinRect.width / 2;
+
+        const anchorY =
+          pinRect.top + pinRect.height / 2;
+
         return {
           id: user.user_id,
+
           width: rect.width,
           height: rect.height,
-          x: rect.left + rect.width / 2,
-          y: rect.top + rect.height / 2,
+
+          anchorX,
+          anchorY,
+
           offsetX: 0,
           offsetY: 0,
         };
       })
       .filter(Boolean);
 
-    const padding = 6;
-    const iterations = 30;
+    if (entries.length === 0) {
+      return;
+    }
+
+    const clusterDistance = 140;
+
+    // Give crowded labels an initial direction
+    // away from the center of nearby pins.
+    for (const entry of entries) {
+      const neighbors = entries.filter(
+        (other) => {
+          if (other.id === entry.id) {
+            return false;
+          }
+
+          return (
+            Math.hypot(
+              other.anchorX - entry.anchorX,
+              other.anchorY - entry.anchorY
+            ) < clusterDistance
+          );
+        }
+      );
+
+      if (neighbors.length === 0) {
+        continue;
+      }
+
+      const cluster = [
+        entry,
+        ...neighbors,
+      ];
+
+      const centerX =
+        cluster.reduce(
+          (sum, item) =>
+            sum + item.anchorX,
+          0
+        ) / cluster.length;
+
+      const centerY =
+        cluster.reduce(
+          (sum, item) =>
+            sum + item.anchorY,
+          0
+        ) / cluster.length;
+
+      let dx =
+        entry.anchorX - centerX;
+
+      let dy =
+        entry.anchorY - centerY;
+
+      let distance =
+        Math.hypot(dx, dy);
+
+      if (distance < 1) {
+        const index =
+          entries.indexOf(entry);
+
+        const angle =
+          index *
+          2.399963229728653;
+
+        dx = Math.cos(angle);
+        dy = Math.sin(angle);
+        distance = 1;
+      }
+
+      const initialSpread = 18;
+
+      entry.offsetX =
+        (dx / distance) *
+        initialSpread;
+
+      entry.offsetY =
+        (dy / distance) *
+        initialSpread;
+    }
+
+    const iterations = 60;
+
+    const paddingX = 12;
+    const paddingY = 8;
+
+    const maxDistance = 85;
+
+    const springStrength = 0.015;
 
     for (
       let iteration = 0;
@@ -97,7 +202,11 @@ const MapPage = () => {
     ) {
       let moved = false;
 
-      for (let i = 0; i < entries.length; i++) {
+      for (
+        let i = 0;
+        i < entries.length;
+        i++
+      ) {
         for (
           let j = i + 1;
           j < entries.length;
@@ -106,23 +215,29 @@ const MapPage = () => {
           const a = entries[i];
           const b = entries[j];
 
-          const ax = a.x + a.offsetX;
-          const ay = a.y + a.offsetY;
+          const ax =
+            a.anchorX + a.offsetX;
 
-          const bx = b.x + b.offsetX;
-          const by = b.y + b.offsetY;
+          const ay =
+            a.anchorY + a.offsetY;
+
+          const bx =
+            b.anchorX + b.offsetX;
+
+          const by =
+            b.anchorY + b.offsetY;
 
           const dx = ax - bx;
           const dy = ay - by;
 
           const overlapX =
             (a.width + b.width) / 2 +
-            padding -
+            paddingX -
             Math.abs(dx);
 
           const overlapY =
             (a.height + b.height) / 2 +
-            padding -
+            paddingY -
             Math.abs(dy);
 
           if (
@@ -131,32 +246,67 @@ const MapPage = () => {
           ) {
             moved = true;
 
-            if (overlapX < overlapY) {
-              const direction =
-                dx >= 0 ? 1 : -1;
+            let distance =
+              Math.hypot(dx, dy);
 
-              const push =
-                overlapX / 2;
+            let nx;
+            let ny;
 
-              a.offsetX +=
-                push * direction;
+            if (distance < 0.1) {
+              const angle =
+                Math.random() *
+                Math.PI *
+                2;
 
-              b.offsetX -=
-                push * direction;
+              nx = Math.cos(angle);
+              ny = Math.sin(angle);
             } else {
-              const direction =
-                dy >= 0 ? 1 : -1;
-
-              const push =
-                overlapY / 2;
-
-              a.offsetY +=
-                push * direction;
-
-              b.offsetY -=
-                push * direction;
+              nx = dx / distance;
+              ny = dy / distance;
             }
+
+            const push =
+              Math.min(
+                overlapX,
+                overlapY
+              ) *
+              0.55;
+
+            a.offsetX += nx * push;
+            a.offsetY += ny * push;
+
+            b.offsetX -= nx * push;
+            b.offsetY -= ny * push;
           }
+        }
+      }
+
+      // Gentle spring keeps labels associated
+      // with their geographic pins.
+      for (const entry of entries) {
+        entry.offsetX -=
+          entry.offsetX *
+          springStrength;
+
+        entry.offsetY -=
+          entry.offsetY *
+          springStrength;
+
+        const distance =
+          Math.hypot(
+            entry.offsetX,
+            entry.offsetY
+          );
+
+        if (
+          distance > maxDistance
+        ) {
+          const scale =
+            maxDistance /
+            distance;
+
+          entry.offsetX *= scale;
+          entry.offsetY *= scale;
         }
       }
 
