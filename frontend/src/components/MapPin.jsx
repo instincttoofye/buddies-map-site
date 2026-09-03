@@ -1,6 +1,12 @@
 import pinSvg from "../assets/base-icon-nms.svg";
 
-const MapPin = ({ x, y, username }) => {
+const MapPin = ({
+  x,
+  y,
+  username,
+  labelRef,
+  labelOffset,
+}) => {
   return (
     <div
       className="map-pin"
@@ -15,11 +21,18 @@ const MapPin = ({ x, y, username }) => {
         className="map-pin-icon"
       />
 
-      <span className="map-pin-label">
+      <span
+        ref={labelRef}
+        className="map-pin-label"
+        style={{
+          "--label-offset-x": `${labelOffset.x}px`,
+          "--label-offset-y": `${labelOffset.y}px`,
+        }}
+      >
         {username}
       </span>
     </div>
   );
-}
+};
 
 export default MapPin;
