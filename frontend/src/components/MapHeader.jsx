@@ -12,6 +12,9 @@ const MapHeader = () => {
       <h1 className="map-header-title">
         WHERE ARE OUR BUDDIES
       </h1>
+      <h1 className="map-header-sub-title">
+        UNDER CONSTRUCTION
+      </h1>
     </header>
   );
 }

@@ -112,6 +112,7 @@ select {
   /*margin-top: 70px;*/
 
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
@@ -144,6 +145,22 @@ select {
 
   line-height: 1;
   white-space: nowrap;
+}
+
+.map-header-sub-title {
+  width: 100%;
+
+  margin: 0;
+
+  font-family: "GoodTimes", sans-serif;
+  font-size: clamp(18px, 6vw, 32px);
+  font-weight: normal;
+  line-height: 1;
+  color: #e6c200;
+  filter: drop-shadow( 0 2 5 #000);
+
+  white-space: normal;
+  text-align: center;
 }
 
 .map-cards {
@@ -475,13 +492,15 @@ select {
       margin: 0;
   
       font-family: "GoodTimes", sans-serif;
-      font-size: clamp(20px, 6vw, 32px);
+      font-size: clamp(18px, 6vw, 32px);
       font-weight: normal;
       line-height: 1;
   
       white-space: normal;
       text-align: center;
     }
+
+  
   
   
     /* =========================
