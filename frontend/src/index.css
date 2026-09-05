@@ -90,11 +90,8 @@ select {
   left: 50%;
 
   transform:
-    translateX(-50%)
-    translate(
-      var(--label-offset-x, 0px),
-      var(--label-offset-y, 0px)
-    );
+    translateX(-50%) translate(var(--label-offset-x, 0px),
+      var(--label-offset-y, 0px));
 
   white-space: nowrap;
   font-family: "GoodTimes", sans-serif;
@@ -201,117 +198,116 @@ select {
    COUNTER CARD
    ========================= */
 
-   .counter-card-border,
-   .main-card-border {
-     position: relative;
-   
-     border-radius: 20px;
-   
-     background: transparent;
-   }
-   
-   .counter-card-border {
-     width: 257px;
-     height: 124px;
-   }
-   
-   .main-card-border {
-     width: 410px;
-     height: 453px;
-   }
-   
-   .counter-card-border::before,
-   .main-card-border::before {
-     content: "";
-   
-     position: absolute;
-     inset: 0;
-   
-     padding: 4px;
-   
-     border-radius: 20px;
-   
-     background: linear-gradient(
-       180deg,
-       #cf26ff 0%,
-       #43c19a 100%
-     );
-   
-     -webkit-mask:
-       linear-gradient(#fff 0 0) content-box,
-       linear-gradient(#fff 0 0);
-   
-     -webkit-mask-composite: xor;
-     mask-composite: exclude;
-   
-     pointer-events: none;
-   }
-   
-   .counter-card,
-   .main-card {
-     width: 100%;
-     height: 100%;
-   
-     border-radius: 20px;
-   
-     background: transparent;
-   }
+.counter-card-border,
+.main-card-border {
+  position: relative;
 
-   .counter-card {
-    width: 100%;
-    height: 100%;
-  
-    box-sizing: border-box;
-    border-radius: 20px;
-  
-    background: transparent;
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  
-    overflow: hidden;
-  }
-  
-  .counter-label {
-    font-family: "GoodTimes", sans-serif;
-    font-size: 14px;
-    line-height: 1;
-  
-    color: #FFF;
-  
-    margin: 0 0 4px 0;
-    padding: 0;
-    filter: drop-shadow(0 0 2 8px #000);
-  }
-  
-  .counter-value {
-    font-family: "GoodTimes", sans-serif;
-    font-size: 72px;
-    line-height: 0.8;
-  
-    color: #FFF;
-  
-    margin: 0;
-    padding: 0;
-    filter: drop-shadow(0 0 2 8px #000);
-  }
+  border-radius: 20px;
+
+  background: transparent;
+}
+
+.counter-card-border {
+  width: 257px;
+  height: 124px;
+}
+
+.main-card-border {
+  width: 410px;
+  height: 453px;
+}
+
+.counter-card-border::before,
+.main-card-border::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  padding: 4px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(180deg,
+      #cf26ff 0%,
+      #43c19a 100%);
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  pointer-events: none;
+}
+
+.counter-card,
+.main-card {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 20px;
+
+  background: transparent;
+}
+
+.counter-card {
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+  border-radius: 20px;
+
+  background: transparent;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.counter-label {
+  font-family: "GoodTimes", sans-serif;
+  font-size: 14px;
+  line-height: 1;
+
+  color: #FFF;
+
+  margin: 0 0 4px 0;
+  padding: 0;
+  filter: drop-shadow(0 0 2 8px #000);
+}
+
+.counter-value {
+  font-family: "GoodTimes", sans-serif;
+  font-size: 72px;
+  line-height: 0.8;
+
+  color: #FFF;
+
+  margin: 0;
+  padding: 0;
+  filter: drop-shadow(0 0 2 8px #000);
+}
+
 /* =========================
    MAIN CARD
    ========================= */
-   .main-card {
-    width: 100%;
-    height: 100%;
-  
-    box-sizing: border-box;
-  
-    padding: 18px 20px;
-  
-    border-radius: 20px;
-  
-    background: transparent;
-  }
+.main-card {
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+
+  padding: 18px 20px;
+
+  border-radius: 20px;
+
+  background: transparent;
+}
 
 .form-title {
   margin: 0 0 20px 0;
@@ -346,7 +342,7 @@ select {
   color: #FFF;
 }
 
- .form-sublabel {
+.form-sublabel {
   width: 100%;
   text-align: left;
 
@@ -397,11 +393,9 @@ select {
   border: none;
   border-radius: 20px;
 
-  background: linear-gradient(
-    90deg,
-    #cf26ff 0%,
-    #43c19a 100%
-  );
+  background: linear-gradient(90deg,
+      #cf26ff 0%,
+      #43c19a 100%);
 
   font-family: "GoodTimes", sans-serif;
   font-size: 42px;
@@ -431,365 +425,365 @@ select {
    MOBILE
    ========================= */
 
-   @media (max-width: 768px) {
+@media (max-width: 768px) {
 
-    html,
-    body,
-    #root {
-      width: 100%;
-      min-width: 0;
-      max-width: 100%;
-  
-      margin: 0;
-      padding: 0;
-  
-      overflow-x: hidden;
-    }
-  
-    body {
-      background: #090726;
-    }
-  
-  
-    /* =========================
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    overflow-x: hidden;
+  }
+
+  body {
+    background: #090726;
+  }
+
+
+  /* =========================
        PAGE
        ========================= */
-  
-    .map-page {
-      width: 100%;
-      min-width: 0;
-      min-height: 100vh;
-  
-      padding-top: 20px;
-  
-      box-sizing: border-box;
-  
-      background-image: url("./assets/BG_2.jpg");
-      background-size: cover;
-      background-position: center top;
-      background-repeat: repeat-y;
-    }
-  
-  
-    /* =========================
+
+  .map-page {
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+
+    padding-top: 20px;
+
+    box-sizing: border-box;
+
+    background-image: url("./assets/BG_2.jpg");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: repeat-y;
+  }
+
+
+  /* =========================
        HEADER
        ========================= */
-  
-       .map-header {
-        width: 100%;
-        height: 95px;
-      
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      
-        background-color: rgba(255, 255, 255, 0.88);
-      
-        font-family: "GoodTimes", sans-serif;
-      
-        overflow: visible;
-      }
-      
-      .map-header-content {
-        display: grid;
-      
-        grid-template-columns: 72px 1fr 72px;
-      
-        align-items: center;
-      
-        width: 100%;
-      
-        padding: 0 40px;
-      
-        box-sizing: border-box;
-      }
-      
-      .map-header-logo {
-        position: static;
-      
-        width: 88px;
-        height: 88px;
-        /*padding-right: 260px;*/
-      
-        justify-self: start;
-      
-        flex-shrink: 0;
-      }
-      
-      .map-header-text {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      
-        grid-column: 2;
-      }
-      
-      .map-header-title {
-        margin: 0;
-      
-        font-family: "GoodTimes", sans-serif;
-        font-size: clamp(16px, 5vw, 24px);
-        font-weight: normal;
-      
-        line-height: 1;
-        white-space: nowrap;
-      
-        color: #000;
-        text-align: center;
-      }
-      
-      .map-header-sub-title {
-        margin: 5px 0 0;
-      
-        font-family: "GoodTimes", sans-serif;
-        font-size: clamp(8px, 2.5vw, 12px);
-        font-weight: normal;
-      
-        line-height: 1;
-        white-space: nowrap;
-      
-        color: #FFD700;
-        text-align: center;
-        filter: drop-shadow(0 2 5 #1a1600);
-      }
 
-    /* =========================
+  .map-header {
+    width: 100%;
+    height: 95px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(255, 255, 255, 0.88);
+
+    font-family: "GoodTimes", sans-serif;
+
+    overflow: visible;
+  }
+
+  .map-header-content {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) 72px;
+
+    align-items: center;
+
+    width: 100%;
+
+    padding: 0 8px;
+
+    box-sizing: border-box;
+  }
+
+  .map-header-logo {
+    position: static;
+
+    width: 88px;
+    height: 88px;
+    /*padding-right: 260px;*/
+
+    justify-self: start;
+
+    flex-shrink: 0;
+  }
+
+  .map-header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    grid-column: 2;
+
+    width: 100%;
+    min-width: 0;
+  }
+
+  .map-header-title {
+    margin: 0;
+
+    width: 100%;
+
+    font-family: "GoodTimes", sans-serif;
+    font-size: clamp(13px, 4.2vw, 20px);
+    font-weight: normal;
+
+    line-height: 1;
+    white-space: nowrap;
+
+    color: #000;
+    text-align: center;
+  }
+
+  .map-header-sub-title {
+    margin: 4px 0 0;
+
+    width: 100%;
+
+    font-family: "GoodTimes", sans-serif;
+    font-size: clamp(7px, 2.1vw, 10px);
+    font-weight: normal;
+
+    line-height: 1;
+    white-space: nowrap;
+
+    color: #FFD700;
+    text-align: center;
+    filter: drop-shadow(0 2 5 #1a1600);
+  }
+
+  /* =========================
        MAP OUTER CONTAINER
        ========================= */
-  
-    .map-container {
-      position: relative;
-  
-      width: 100%;
-  
-      margin-top: 30px;
-    }
-  
-  
-    /* =========================
+
+  .map-container {
+    position: relative;
+
+    width: 100%;
+
+    margin-top: 30px;
+  }
+
+
+  /* =========================
        MAP + PINS ONLY
   
        This wrapper MUST only contain
        the actual map and its pins.
        ========================= */
-  
-    .map-visual {
-      position: relative;
-  
-      width: 100%;
-    }
-  
-    .world-map {
-      display: block;
-  
-      width: 100%;
-      height: auto;
-    }
-  
-  
-    /* =========================
+
+  .map-visual {
+    position: relative;
+
+    width: 100%;
+  }
+
+  .world-map {
+    display: block;
+
+    width: 100%;
+    height: auto;
+  }
+
+
+  /* =========================
        PINS
        ========================= */
-  
-    .map-pin {
-      position: absolute;
-  
-      transform: translateX(-50%);
-    }
-  
-    .map-pin-icon {
-      display: block;
-  
-      width: 9px;
-      height: 8px;
-  
-      transform: translateY(-100%);
-  
-      filter: drop-shadow(0 0 3px #000);
-    }
-  
-    .map-pin-label {
-      position: absolute;
-    
-      top: 2px;
-      left: 50%;
-    
-      transform:
-        translateX(-50%)
-        translate(
-          var(--label-offset-x, 0px),
-          var(--label-offset-y, 0px)
-        );
-    
-      white-space: nowrap;
-    
-      font-family: "GoodTimes", sans-serif;
-      font-size: 2px;
-    
-      color: #FFD700;
-    
-      filter: drop-shadow(0 0 2px #000);
-    }
-  
-  
-    /* =========================
+
+  .map-pin {
+    position: absolute;
+
+    transform: translateX(-50%);
+  }
+
+  .map-pin-icon {
+    display: block;
+
+    width: 9px;
+    height: 8px;
+
+    transform: translateY(-100%);
+
+    filter: drop-shadow(0 0 3px #000);
+  }
+
+  .map-pin-label {
+    position: absolute;
+
+    top: 2px;
+    left: 50%;
+
+    transform:
+      translateX(-50%) translate(var(--label-offset-x, 0px),
+        var(--label-offset-y, 0px));
+
+    white-space: nowrap;
+
+    font-family: "GoodTimes", sans-serif;
+    font-size: 2px;
+
+    color: #FFD700;
+
+    filter: drop-shadow(0 0 2px #000);
+  }
+
+
+  /* =========================
        CARDS
        ========================= */
-  
-    .map-cards {
-      position: static;
-  
-      width: 100%;
-  
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  
-      gap: 12px;
-  
-      margin-top: 20px;
-  
-      padding:
-        0
-        16px
-        100px
-        16px;
-  
-      box-sizing: border-box;
-    }
-  
-  
-    /* =========================
+
+  .map-cards {
+    position: static;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 20px;
+
+    padding:
+      0 16px 100px 16px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* =========================
        COUNTER
        ========================= */
-  
-    .counter-card-border {
-      width: 100%;
-      max-width: 300px;
-  
-      height: 124px;
-    }
-  
-    .counter-label {
-      font-size: 14px;
-    }
-  
-    .counter-value {
-      font-size: 72px;
-    }
-  
-  
-    /* =========================
+
+  .counter-card-border {
+    width: 100%;
+    max-width: 300px;
+
+    height: 124px;
+  }
+
+  .counter-label {
+    font-size: 14px;
+  }
+
+  .counter-value {
+    font-size: 72px;
+  }
+
+
+  /* =========================
        FORM STACK
        ========================= */
-  
-    .form-card-stack {
-      position: relative;
-  
-      width: 100%;
-      max-width: 410px;
-    }
-  
-    .main-card-border {
-      width: 100%;
-  
-      height: 453px;
-    }
-  
-    .main-card {
-      width: 100%;
-      height: 100%;
-  
-      padding: 18px 20px;
-  
-      box-sizing: border-box;
-    }
-  
-  
-    /* =========================
+
+  .form-card-stack {
+    position: relative;
+
+    width: 100%;
+    max-width: 410px;
+  }
+
+  .main-card-border {
+    width: 100%;
+
+    height: 453px;
+  }
+
+  .main-card {
+    width: 100%;
+    height: 100%;
+
+    padding: 18px 20px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* =========================
        FORM
        ========================= */
-  
-    .form-title {
-      margin: 0 0 20px 0;
-  
-      font-family: "GoodTimes", sans-serif;
-      font-size: 24px;
-  
-      line-height: 1;
-  
-      color: #FFF;
-    }
-  
-    .location-form {
-      width: 100%;
-  
-      display: flex;
-      flex-direction: column;
-  
-      gap: 16px;
-  
-      font-family: "GoodTimes", sans-serif;
-    }
-  
-    .form-field {
-      width: 100%;
-  
-      display: flex;
-      flex-direction: column;
-  
-      gap: 7px;
-    }
-  
-    .form-field label {
-      font-family: "GoodTimes", sans-serif;
-      font-size: 16px;
-  
-      line-height: 1;
-  
-      color: #FFF;
-    }
+
+  .form-title {
+    margin: 0 0 20px 0;
+
+    font-family: "GoodTimes", sans-serif;
+    font-size: 24px;
+
+    line-height: 1;
+
+    color: #FFF;
+  }
+
+  .location-form {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+
+    font-family: "GoodTimes", sans-serif;
+  }
+
+  .form-field {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+  }
+
+  .form-field label {
+    font-family: "GoodTimes", sans-serif;
+    font-size: 16px;
+
+    line-height: 1;
+
+    color: #FFF;
+  }
 
 
-    .form-field input {
-      width: 100%;
-      height: 42px;
-  
-      box-sizing: border-box;
-  
-      padding: 0 14px;
-  
-      border: none;
-      border-radius: 20px;
-  
-      outline: none;
-  
-      background: #FFF;
-  
-      font-family: "GoodTimes", sans-serif;
-      font-size: 16px;
-  
-      color: #000;
-    }
-  
-  
-    /* =========================
+  .form-field input {
+    width: 100%;
+    height: 42px;
+
+    box-sizing: border-box;
+
+    padding: 0 14px;
+
+    border: none;
+    border-radius: 20px;
+
+    outline: none;
+
+    background: #FFF;
+
+    font-family: "GoodTimes", sans-serif;
+    font-size: 16px;
+
+    color: #000;
+  }
+
+
+  /* =========================
        SUBMIT
        ========================= */
-  
-    .submit-button {
-      position: absolute;
-  
-      left: 20px;
-      bottom: -70px;
-  
-      width: calc(100% - 40px);
-      height: 70px;
-  
-      border-radius: 20px;
-  
-      font-family: "GoodTimes", sans-serif;
-      font-size: 36px;
-    }
+
+  .submit-button {
+    position: absolute;
+
+    left: 20px;
+    bottom: -70px;
+
+    width: calc(100% - 40px);
+    height: 70px;
+
+    border-radius: 20px;
+
+    font-family: "GoodTimes", sans-serif;
+    font-size: 36px;
   }
+}
