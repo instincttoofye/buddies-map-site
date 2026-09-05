@@ -500,8 +500,8 @@ select {
   .map-header-logo {
     position: static;
 
-    width: 88px;
-    height: 88px;
+    width: 95px;
+    height: 95px;
     /*padding-right: 260px;*/
 
     justify-self: start;
