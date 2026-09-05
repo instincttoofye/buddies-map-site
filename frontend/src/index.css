@@ -179,6 +179,7 @@ select {
 
   color: #FFD700;
   text-align: center;
+  filter: drop-shadow(0 2 5 #1a1600);
 }
 
 .map-cards {
