@@ -616,9 +616,8 @@ select {
     left: 50%;
 
     transform:
-      translateX(-50%) translate(var(--label-offset-x, 0px),
-        var(--label-offset-y, 0px));
-
+      translateX(-50%);
+ 
     white-space: nowrap;
 
     font-family: "GoodTimes", sans-serif;
