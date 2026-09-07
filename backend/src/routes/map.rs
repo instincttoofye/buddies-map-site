@@ -7,6 +7,230 @@ use tracing::{error, info};
 use crate::models::{map_submission::MapSubmission, map_user::MapUser};
 use crate::utils::normalize::normalize_discord_username;
 
+fn get_region(country: &str) -> Option<&'static str> {
+    match country.trim().to_lowercase().as_str() {
+        // North America
+        "usa"
+        | "us"
+        | "u.s."
+        | "u.s.a."
+        | "united states"
+        | "united states of america"
+        | "canada"
+        | "mexico"
+        | "greenland"
+        | "belize"
+        | "costa rica"
+        | "el salvador"
+        | "guatemala"
+        | "honduras"
+        | "nicaragua"
+        | "panama"
+        | "bahamas"
+        | "barbados"
+        | "cuba"
+        | "dominica"
+        | "dominican republic"
+        | "grenada"
+        | "haiti"
+        | "jamaica"
+        | "saint kitts and nevis"
+        | "saint lucia"
+        | "saint vincent and the grenadines"
+        | "trinidad and tobago"
+        | "antigua and barbuda" => Some("North America"),
+
+        // South America
+        "argentina" | "bolivia" | "brazil" | "chile" | "colombia" | "ecuador" | "guyana"
+        | "paraguay" | "peru" | "suriname" | "uruguay" | "venezuela" => Some("South America"),
+
+        // Europe
+        "albania"
+        | "andorra"
+        | "austria"
+        | "belarus"
+        | "belgium"
+        | "bosnia and herzegovina"
+        | "bulgaria"
+        | "croatia"
+        | "cyprus"
+        | "czechia"
+        | "czech republic"
+        | "denmark"
+        | "estonia"
+        | "finland"
+        | "france"
+        | "germany"
+        | "greece"
+        | "hungary"
+        | "iceland"
+        | "ireland"
+        | "italy"
+        | "kosovo"
+        | "latvia"
+        | "liechtenstein"
+        | "lithuania"
+        | "luxembourg"
+        | "malta"
+        | "moldova"
+        | "monaco"
+        | "montenegro"
+        | "netherlands"
+        | "north macedonia"
+        | "norway"
+        | "poland"
+        | "portugal"
+        | "romania"
+        | "san marino"
+        | "serbia"
+        | "slovakia"
+        | "slovenia"
+        | "spain"
+        | "españa"
+        | "sweden"
+        | "switzerland"
+        | "uk"
+        | "united kingdom"
+        | "england"
+        | "scotland"
+        | "wales"
+        | "northern ireland"
+        | "ukraine"
+        | "vatican city" => Some("Europe"),
+
+        // Africa
+        "algeria"
+        | "angola"
+        | "benin"
+        | "botswana"
+        | "burkina faso"
+        | "burundi"
+        | "cabo verde"
+        | "cape verde"
+        | "cameroon"
+        | "central african republic"
+        | "chad"
+        | "comoros"
+        | "democratic republic of the congo"
+        | "dr congo"
+        | "congo"
+        | "republic of the congo"
+        | "djibouti"
+        | "egypt"
+        | "equatorial guinea"
+        | "eritrea"
+        | "eswatini"
+        | "ethiopia"
+        | "gabon"
+        | "gambia"
+        | "ghana"
+        | "guinea"
+        | "guinea-bissau"
+        | "ivory coast"
+        | "côte d'ivoire"
+        | "kenya"
+        | "lesotho"
+        | "liberia"
+        | "libya"
+        | "madagascar"
+        | "malawi"
+        | "mali"
+        | "mauritania"
+        | "mauritius"
+        | "morocco"
+        | "mozambique"
+        | "namibia"
+        | "niger"
+        | "nigeria"
+        | "rwanda"
+        | "sao tome and principe"
+        | "senegal"
+        | "seychelles"
+        | "sierra leone"
+        | "somalia"
+        | "south africa"
+        | "south sudan"
+        | "sudan"
+        | "tanzania"
+        | "togo"
+        | "tunisia"
+        | "uganda"
+        | "zambia"
+        | "zimbabwe" => Some("Africa"),
+
+        // Asia
+        "afghanistan"
+        | "armenia"
+        | "azerbaijan"
+        | "bahrain"
+        | "bangladesh"
+        | "bhutan"
+        | "brunei"
+        | "cambodia"
+        | "china"
+        | "georgia"
+        | "india"
+        | "indonesia"
+        | "iran"
+        | "iraq"
+        | "israel"
+        | "japan"
+        | "jordan"
+        | "kazakhstan"
+        | "kuwait"
+        | "kyrgyzstan"
+        | "laos"
+        | "lebanon"
+        | "malaysia"
+        | "maldives"
+        | "mongolia"
+        | "myanmar"
+        | "burma"
+        | "nepal"
+        | "north korea"
+        | "oman"
+        | "pakistan"
+        | "palestine"
+        | "philippines"
+        | "qatar"
+        | "saudi arabia"
+        | "singapore"
+        | "south korea"
+        | "sri lanka"
+        | "syria"
+        | "taiwan"
+        | "tajikistan"
+        | "thailand"
+        | "timor-leste"
+        | "turkey"
+        | "türkiye"
+        | "turkmenistan"
+        | "united arab emirates"
+        | "uae"
+        | "uzbekistan"
+        | "vietnam"
+        | "yemen" => Some("Asia"),
+
+        // Oceania
+        "australia"
+        | "fiji"
+        | "kiribati"
+        | "marshall islands"
+        | "micronesia"
+        | "federated states of micronesia"
+        | "nauru"
+        | "new zealand"
+        | "palau"
+        | "papua new guinea"
+        | "samoa"
+        | "solomon islands"
+        | "tonga"
+        | "tuvalu"
+        | "vanuatu" => Some("Oceania"),
+
+        _ => None,
+    }
+}
 pub async fn get_map(State(pool): State<PgPool>) -> Result<Json<Vec<MapUser>>, StatusCode> {
     info!("GET /map - request received");
 
@@ -54,6 +278,10 @@ pub async fn create_map_entry(
     let discord_username = payload.discord_username.trim();
     let country = payload.country.trim();
     let city = payload.city.trim();
+
+    let region = get_region(country)
+        .ok_or_else(|| (StatusCode::BAD_REQUEST, "Unsupported country".to_string()))?;
+
     let normalized_username = normalize_discord_username(discord_username);
 
     if discord_username.is_empty() {
@@ -113,8 +341,7 @@ pub async fn create_map_entry(
 
         return Err((
             StatusCode::CONFLICT,
-            "That Discord user is already on the map"
-            .to_string(),
+            "That Discord user is already on the map".to_string(),
         ));
     }
 
@@ -198,14 +425,15 @@ pub async fn create_map_entry(
     sqlx::query(
         r#"
         INSERT INTO locations (
-            user_id,
-            country,
-            state,
-            city,
-            latitude,
-            longitude
-        )
-        VALUES ($1, $2, $3, $4, $5, $6)
+    user_id,
+    country,
+    state,
+    city,
+    latitude,
+    longitude,
+    region
+)
+VALUES ($1, $2, $3, $4, $5, $6, $7)
         "#,
     )
     .bind(user_id)
@@ -214,6 +442,7 @@ pub async fn create_map_entry(
     .bind(city)
     .bind(coordinates.latitude)
     .bind(coordinates.longitude)
+    .bind(region)
     .execute(&mut *transaction)
     .await
     .map_err(internal_error)?;
