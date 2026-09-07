@@ -280,6 +280,19 @@ pub async fn create_map_entry(
     let city = payload.city.trim();
     let platform = payload.platform.trim();
 
+    let platform = match platform.to_lowercase().as_str() {
+        "xbox" => "Xbox",
+        "playstation" => "PlayStation",
+        "pc" => "PC",
+        "switch" => "Switch",
+        _ => {
+            return Err((
+                StatusCode::BAD_REQUEST,
+                "Unsupported platform".to_string(),
+            ));
+        }
+    };
+
     if platform.is_empty() {
         info!(
             discord_username = %discord_username,
@@ -412,7 +425,7 @@ pub async fn create_map_entry(
         discord_username = %discord_username,
         "POST /map - database transaction started"
     );
-    
+
     let user_id: uuid::Uuid = sqlx::query_scalar(
         r#"
         INSERT INTO users (
