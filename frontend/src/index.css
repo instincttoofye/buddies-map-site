@@ -357,7 +357,8 @@ select {
 }
 
 
-.form-field input {
+.form-field input,
+.form-field select {
   width: 100%;
   height: 42px;
 
