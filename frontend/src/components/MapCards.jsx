@@ -19,6 +19,7 @@ const MapCards = ({ onUserCreated }) => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState(null);
+    const [showRegions, setShowRegions] = useState(false);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -216,8 +217,10 @@ const MapCards = ({ onUserCreated }) => {
                 </div>
 
                 <SubmitButton disabled={isSubmitting} />
-
-                <RegionDropdown />
+                 <button className="dropdown-button" onClick={() => setShowRegions((current) => !current)}>
+                    <h2>VIEW BUDDIES BY REGION</h2>
+                 </button>           
+                {showRegions && <RegionDropdown />}
             </div>
 
         </div>

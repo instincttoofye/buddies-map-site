@@ -44,9 +44,11 @@ select {
 .map-page {
   width: 100%;
   min-width: 1200px;
-  min-height: 100vh;
+
+  min-height: max(100vh, 1440px);
 
   padding-top: 70px;
+
   box-sizing: border-box;
 
   background-image: url("./assets/BG_2.jpg");
@@ -506,6 +508,34 @@ select {
   
   .region-members {
     padding: 0 18px 14px;
+  }
+
+  .dropdown-button {
+    position: absolute;
+
+    left: 20px;
+    bottom: -80px;
+  
+    width: calc(100% - 40px);
+    height: 70px;
+  
+    border: none;
+    border-radius: 20px;
+  
+    background: linear-gradient(90deg,
+        #cf26ff 0%,
+        #43c19a 100%);
+  
+    font-family: "GoodTimes", sans-serif;
+    font-size: 20px;
+    line-height: 1;
+  
+    color: #FFF;
+    filter: drop-shadow(0 2 3 #1a1a1a);
+  
+    cursor: pointer;
+  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.45);
   }
 
 /* =========================

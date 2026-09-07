@@ -53,10 +53,6 @@ const RegionDropdown = () => {
 
     return (
         <div className="region-dropdown">
-
-            <h2 className="region-dropdown-title">
-                VIEW BUDDIES BY REGION
-            </h2>
             {error && (
                 <p className="region-dropdown-error">
                     {error}
