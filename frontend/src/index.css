@@ -514,7 +514,7 @@ select {
     position: absolute;
 
     left: 20px;
-    bottom: -80px;
+    bottom: -170px;
   
     width: calc(100% - 40px);
     height: 70px;
@@ -527,7 +527,7 @@ select {
         #43c19a 100%);
   
     font-family: "GoodTimes", sans-serif;
-    font-size: 20px;
+    font-size: 14px;
     line-height: 1;
   
     color: #FFF;

@@ -218,7 +218,7 @@ const MapCards = ({ onUserCreated }) => {
 
                 <SubmitButton disabled={isSubmitting} />
                  <button className="dropdown-button" onClick={() => setShowRegions((current) => !current)}>
-                    <h2>VIEW BUDDIES BY REGION</h2>
+                    <h2>VIEW BUDDIES BY REGION {showRegions ? "▲" : "▼"}</h2>
                  </button>           
                 {showRegions && <RegionDropdown />}
             </div>
