@@ -4,8 +4,6 @@ const MapPin = ({
   x,
   y,
   username,
-  labelRef,
-  labelOffset,
 }) => {
   return (
     <div
@@ -21,14 +19,7 @@ const MapPin = ({
         className="map-pin-icon"
       />
 
-      <span
-        ref={labelRef}
-        className="map-pin-label"
-        style={{
-          "--label-offset-x": `${labelOffset.x}px`,
-          "--label-offset-y": `${labelOffset.y}px`,
-        }}
-      >
+      <span className="map-pin-label">
         {username}
       </span>
     </div>

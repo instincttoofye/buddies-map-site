@@ -86,17 +86,17 @@ select {
 
 .map-pin-label {
   position: absolute;
+
   top: 4px;
   left: 50%;
-
-  transform:
-    translateX(-50%) translate(var(--label-offset-x, 0px),
-      var(--label-offset-y, 0px));
+  transform: translateX(-50%);
 
   white-space: nowrap;
+
   font-family: "GoodTimes", sans-serif;
   font-size: 6px;
   color: #FFD700;
+
   filter: drop-shadow(0 0 2px #000);
 }
 

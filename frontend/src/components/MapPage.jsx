@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { getMapUsers } from "../api/mapApi";
 import { latLonToMapPosition } from "../utils/mapProjection";
-import { resolveLabelCollisions } from "../utils/resolveLabelCollisions";
 
 import mapSvg from "../assets/buddies-map.svg";
 
@@ -13,8 +12,6 @@ import MapCards from "./MapCards";
 const MapPage = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
-  const labelRefs = useRef({});
-  const [labelOffsets, setLabelOffsets] = useState({});
 
   useEffect(() => {
     const loadUsers = async () => {
@@ -33,35 +30,6 @@ const MapPage = () => {
 
     loadUsers();
   }, []);
-  useEffect(() => {
-    const updateLabelPositions = () => {
-      const offsets =
-        resolveLabelCollisions(
-          users,
-          labelRefs
-        );
-  
-      setLabelOffsets(offsets);
-    };
-  
-    const timeout = setTimeout(() => {
-      updateLabelPositions();
-    }, 0);
-  
-    window.addEventListener(
-      "resize",
-      updateLabelPositions
-    );
-  
-    return () => {
-      clearTimeout(timeout);
-  
-      window.removeEventListener(
-        "resize",
-        updateLabelPositions
-      );
-    };
-  }, [users]);
 
 
   return (
@@ -98,12 +66,6 @@ const MapPage = () => {
               return null;
             }
 
-            const labelOffset =
-              labelOffsets[user.user_id] ?? {
-                x: 0,
-                y: 0,
-              };
-
             return (
               <MapPin
                 key={user.user_id}
@@ -112,14 +74,6 @@ const MapPage = () => {
                 username={
                   user.discord_username
                 }
-                labelRef={(element) => {
-                  if (element) {
-                    labelRefs.current[
-                      user.user_id
-                    ] = element;
-                  }
-                }}
-                labelOffset={labelOffset}
               />
             );
           })}
