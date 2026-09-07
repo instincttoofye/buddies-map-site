@@ -9,6 +9,7 @@ const MapCards = ({ onUserCreated }) => {
 
     const [formData, setFormData] = useState({
         username: "",
+        platform: "",
         country: "",
         state: "",
         city: "",
@@ -39,6 +40,7 @@ const MapCards = ({ onUserCreated }) => {
 
             setFormData({
                 username: "",
+                platform: "",
                 country: "",
                 state: "",
                 city: "",
@@ -57,19 +59,19 @@ const MapCards = ({ onUserCreated }) => {
 
     useEffect(() => {
         const loadServerStats = async () => {
-          try {
-            const stats = await getServerStats();
-            setMemberCount(stats.member_count);
-          } catch (error) {
-            console.error(
-              "Failed to fetch Discord member count:",
-              error
-            );
-          }
+            try {
+                const stats = await getServerStats();
+                setMemberCount(stats.member_count);
+            } catch (error) {
+                console.error(
+                    "Failed to fetch Discord member count:",
+                    error
+                );
+            }
         };
-      
+
         loadServerStats();
-      }, []);
+    }, []);
 
     return (
         <div className="map-cards">
@@ -82,8 +84,8 @@ const MapCards = ({ onUserCreated }) => {
                     </span>
 
                     <span className="counter-value">
-  {memberCount ?? "---"}
-</span>
+                        {memberCount ?? "---"}
+                    </span>
 
                 </div>
             </div>
@@ -120,6 +122,40 @@ const MapCards = ({ onUserCreated }) => {
                                     onChange={handleChange}
                                     required
                                 />
+                            </div>
+
+                            <div className="form-field">
+                                <label htmlFor="platform">
+                                    PLATFORM
+                                </label>
+
+                                <select
+                                    id="platform"
+                                    name="platform"
+                                    value={formData.platform}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">
+                                        SELECT PLATFORM
+                                    </option>
+
+                                    <option value="Xbox">
+                                        Xbox
+                                    </option>
+
+                                    <option value="PlayStation">
+                                        PlayStation
+                                    </option>
+
+                                    <option value="PC">
+                                        PC
+                                    </option>
+
+                                    <option value="Switch">
+                                        Switch
+                                    </option>
+                                </select>
                             </div>
 
                             <div className="form-field">

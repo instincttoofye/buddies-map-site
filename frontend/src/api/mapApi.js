@@ -32,6 +32,7 @@ export const createMapUser = async (formData) => {
 
     body: JSON.stringify({
       discord_username: formData.username,
+      platform: formData.platform,
       country: formData.country,
       state: formData.state || null,
       city: formData.city,
