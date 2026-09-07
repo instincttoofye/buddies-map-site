@@ -213,12 +213,11 @@ const MapCards = ({ onUserCreated }) => {
                         </form>
 
                     </div>
-
-                    <RegionDropdown />
                 </div>
 
                 <SubmitButton disabled={isSubmitting} />
 
+                <RegionDropdown />
             </div>
 
         </div>
