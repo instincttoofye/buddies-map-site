@@ -378,6 +378,10 @@ select {
   color: #000;
 }
 
+.form-field select {
+  color: #999 !important;
+}
+
 .form-field input:focus {
   outline: 3px solid #cf26ff;
 }
