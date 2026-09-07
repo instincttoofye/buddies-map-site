@@ -49,3 +49,25 @@ export const createMapUser = async (formData) => {
 
   return response.json();
 };
+
+export const getRegions = async () => {
+  const response = await fetch(`${BASE_URL}/regions`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch regions");
+  }
+
+  return response.json();
+};
+
+export const getRegionMembers = async (region) => {
+  const response = await fetch(
+    `${BASE_URL}/regions/${encodeURIComponent(region)}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch region members");
+  }
+
+  return response.json();
+};

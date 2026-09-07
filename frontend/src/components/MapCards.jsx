@@ -4,6 +4,8 @@ import { createMapUser, getServerStats } from "../api/mapApi";
 
 import SubmitButton from "./SubmitButton";
 
+import RegionDropdown from "./RegionDropdown";
+
 const MapCards = ({ onUserCreated }) => {
     const [memberCount, setMemberCount] = useState(null);
 
@@ -212,6 +214,8 @@ const MapCards = ({ onUserCreated }) => {
 
                     </div>
                 </div>
+
+                <RegionDropdown />
 
                 <SubmitButton disabled={isSubmitting} />
 
