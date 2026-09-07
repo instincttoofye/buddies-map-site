@@ -278,6 +278,19 @@ pub async fn create_map_entry(
     let discord_username = payload.discord_username.trim();
     let country = payload.country.trim();
     let city = payload.city.trim();
+    let platform = payload.platform.trim();
+
+    if platform.is_empty() {
+        info!(
+            discord_username = %discord_username,
+            "POST /map - rejected request: platform is missing"
+        );
+    
+        return Err((
+            StatusCode::BAD_REQUEST,
+            "Platform is required".to_string(),
+        ));
+    }
 
     let region = get_region(country)
         .ok_or_else(|| (StatusCode::BAD_REQUEST, "Unsupported country".to_string()))?;
@@ -399,19 +412,21 @@ pub async fn create_map_entry(
         discord_username = %discord_username,
         "POST /map - database transaction started"
     );
-
+    
     let user_id: uuid::Uuid = sqlx::query_scalar(
         r#"
         INSERT INTO users (
             discord_username,
-            discord_username_normalized
+            discord_username_normalized,
+            platform
         )
-        VALUES ($1, $2)
+        VALUES ($1, $2, $3)
         RETURNING id
         "#,
     )
     .bind(discord_username)
     .bind(&normalized_username)
+    .bind(platform)
     .fetch_one(&mut *transaction)
     .await
     .map_err(internal_error)?;
