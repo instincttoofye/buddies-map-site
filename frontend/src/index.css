@@ -44,7 +44,7 @@ select {
 .map-page {
   width: 100%;
   min-width: 1200px;
-  min-height: max(100vh, 1200px);
+  min-height: 100vh;
 
   padding-top: 70px;
   box-sizing: border-box;
@@ -425,6 +425,88 @@ select {
   color: #e50000;
   filter: drop-shadow(0 0 0 5 #170000)
 }
+
+/* =========================
+   REGION DROPDOWN
+   ========================= */
+
+   .region-dropdown {
+    width: 100%;
+    max-width: 410px;
+    margin-top: 32px;
+  
+    font-family: "GoodTimes", sans-serif;
+  }
+  
+  .region-dropdown-title {
+    margin: 0 0 16px;
+  
+    font-size: 22px;
+    font-weight: normal;
+    text-align: center;
+  
+    color: #fff;
+  }
+  
+  .region-section {
+    overflow: hidden;
+  
+    margin-bottom: 10px;
+  
+    border: 2px solid #43c19a;
+    border-radius: 14px;
+  
+    background: rgba(9, 7, 38, 0.8);
+  }
+  
+  .region-header {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 14px;
+  
+    width: 100%;
+    min-height: 52px;
+  
+    padding: 0 18px;
+  
+    font-family: "GoodTimes", sans-serif;
+    font-size: 15px;
+  
+    color: #fff;
+    background: transparent;
+  
+    border: none;
+  
+    cursor: pointer;
+  }
+  
+  .region-name {
+    text-align: left;
+  }
+  
+  .region-count {
+    min-width: 24px;
+    text-align: right;
+  
+    color: #43c19a;
+  }
+  
+  .region-arrow {
+    display: inline-block;
+  
+    font-size: 11px;
+  
+    transition: transform 0.2s ease;
+  }
+  
+  .region-arrow.open {
+    transform: rotate(180deg);
+  }
+  
+  .region-members {
+    padding: 0 18px 14px;
+  }
 
 /* =========================
    MOBILE
