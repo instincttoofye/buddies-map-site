@@ -15,9 +15,6 @@ const MapHeader = () => {
             WHERE ARE OUR BUDDIES
           </h1>
 
-          <h2 className="map-header-sub-title">
-            UNDER CONSTRUCTION
-          </h2>
         </div>
       </div>
     </header>
