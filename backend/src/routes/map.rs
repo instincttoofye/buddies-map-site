@@ -52,6 +52,14 @@ pub async fn create_map_entry(
     info!("POST /map - request received");
 
     let discord_username = payload.discord_username.trim();
+
+    if discord_username.chars().count() > 32 {
+        return Err((
+            StatusCode::BAD_REQUEST,
+            "Discord username must be 32 characters or fewer".to_string(),
+        ));
+    }
+    
     let country = payload.country.trim();
     let city = payload.city.trim();
     let platform = payload.platform.trim();
