@@ -60,6 +60,13 @@ pub async fn create_map_entry(
         ));
     }
 
+    if discord_username.chars().any(char::is_whitespace) {
+        return Err((
+            StatusCode::BAD_REQUEST,
+            "Discord username cannot contain whitespace".to_string(),
+        ));
+    }
+
     let country = payload.country.trim();
     let city = payload.city.trim();
     let platform = payload.platform.trim();
