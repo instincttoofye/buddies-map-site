@@ -414,11 +414,9 @@ select {
   border: none;
   border-radius: 20px;
 
-  background: linear-gradient(
-    90deg,
-    #cf26ff 0%,
-    #43c19a 100%
-  );
+  background: linear-gradient(90deg,
+      #cf26ff 0%,
+      #43c19a 100%);
 
   font-family: "GoodTimes", sans-serif;
   font-size: 42px;
@@ -448,177 +446,175 @@ select {
 /* =========================
    REGION DROPDOWN
    ========================= */
-   .region-dropdown {
-    width: calc(100% - 40px);
-    max-width: 410px;
-  
-    margin: 32px 20px 0;
-  
-    font-family: "GoodTimes", sans-serif;
-  }
-  
-  .region-dropdown-title {
-    margin: 0 0 16px;
-  
-    font-size: 22px;
-    font-weight: normal;
-    text-align: center;
-  
-    color: #fff;
-  }
-  
-  .region-section {
-    overflow: hidden;
-  
-    margin-bottom: 10px;
-  
-    border: 2px solid #43c19a;
-    border-radius: 14px;
-  
-    background: rgba(9, 7, 38, 0.9);
-  }
-  
-  .region-header {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    align-items: center;
-    gap: 14px;
-  
-    width: 100%;
-    min-height: 52px;
-  
-    padding: 0 18px;
-  
-    font-family: "GoodTimes", sans-serif;
-    font-size: 15px;
-  
-    color: #fff;
-    background: transparent;
-  
-    border: none;
-  
-    cursor: pointer;
-  }
-  
-  .region-name {
-    text-align: left;
-  }
-  
-  .region-count {
-    min-width: 24px;
-    text-align: right;
-  
-    color: #43c19a;
-  }
-  
-  .region-arrow {
-    display: inline-block;
-  
-    font-size: 11px;
-  
-    transition: transform 0.2s ease;
-  }
-  
-  .region-arrow.open {
-    transform: rotate(180deg);
-  }
-  
-  .region-members {
-    padding: 0 18px 14px;
-  }
+.region-dropdown {
+  width: calc(100% - 40px);
+  max-width: 410px;
 
-  .dropdown-button {
-    position: static;
-  
-    width: calc(100% - 40px);
-    height: 70px;
-  
-    margin: 0 20px;
-  
-    border: none;
-    border-radius: 20px;
-  
-    background: linear-gradient(
-      90deg,
+  margin: 32px 20px 0;
+
+  font-family: "GoodTimes", sans-serif;
+}
+
+.region-dropdown-title {
+  margin: 0 0 16px;
+
+  font-size: 22px;
+  font-weight: normal;
+  text-align: center;
+
+  color: #fff;
+}
+
+.region-section {
+  overflow: hidden;
+
+  margin-bottom: 10px;
+
+  border: 2px solid #43c19a;
+  border-radius: 14px;
+
+  background: rgba(9, 7, 38, 0.9);
+}
+
+.region-header {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 14px;
+
+  width: 100%;
+  min-height: 52px;
+
+  padding: 0 18px;
+
+  font-family: "GoodTimes", sans-serif;
+  font-size: 15px;
+
+  color: #fff;
+  background: transparent;
+
+  border: none;
+
+  cursor: pointer;
+}
+
+.region-name {
+  text-align: left;
+}
+
+.region-count {
+  min-width: 24px;
+  text-align: right;
+
+  color: #43c19a;
+}
+
+.region-arrow {
+  display: inline-block;
+
+  font-size: 11px;
+
+  transition: transform 0.2s ease;
+}
+
+.region-arrow.open {
+  transform: rotate(180deg);
+}
+
+.region-members {
+  padding: 0 18px 14px;
+}
+
+.dropdown-button {
+  position: static;
+
+  width: calc(100% - 40px);
+  height: 70px;
+
+  margin: 0 20px;
+
+  border: none;
+  border-radius: 20px;
+
+  background: linear-gradient(90deg,
       #cf26ff 0%,
-      #43c19a 100%
-    );
-  
-    font-family: "GoodTimes", sans-serif;
-    font-size: 14px;
-    line-height: 1;
-  
-    color: #FFF;
-  
-    filter: drop-shadow(0 2px 3px #1a1a1a);
-  
-    cursor: pointer;
-  
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.45);
-  }
+      #43c19a 100%);
 
-  .region-members {
-    display: flex;
-    flex-direction: column;
-  
-    padding: 0 14px 14px;
-  }
-  
-  .region-member {
-    display: grid;
-  
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      "name platform"
-      "location platform";
-  
-    align-items: center;
-  
-    width: 100%;
-  
-    padding: 12px 0;
-  
-    box-sizing: border-box;
-  
-    border-bottom: 1px solid rgba(67, 193, 154, 0.35);
-  }
-  
-  .region-member:last-child {
-    border-bottom: none;
-  }
+  font-family: "GoodTimes", sans-serif;
+  font-size: 14px;
+  line-height: 1;
 
-  .region-member-name {
-    grid-area: name;
-  
-    font-family: "GoodTimes", sans-serif;
-    font-size: 13px;
-    line-height: 1.2;
-  
-    color: #fff;
-  }
+  color: #FFF;
 
-  .region-member-location {
-    grid-area: location;
-  
-    margin-top: 4px;
-  
-    font-family: "GoodTimes", sans-serif;
-    font-size: 8px;
-    line-height: 1.2;
-  
-    color: #999;
-  }
+  filter: drop-shadow(0 2px 3px #1a1a1a);
 
-  .region-member-platform {
-    grid-area: platform;
-  
-    width: 28px;
-    height: 28px;
-  
-    margin-left: 12px;
-  
-    object-fit: contain;
-  }
+  cursor: pointer;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.45);
+}
+
+.region-members {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 14px 14px;
+}
+
+.region-member {
+  display: grid;
+
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "name platform"
+    "location platform";
+
+  align-items: center;
+
+  width: 100%;
+
+  padding: 12px 0;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid rgba(67, 193, 154, 0.35);
+}
+
+.region-member:last-child {
+  border-bottom: none;
+}
+
+.region-member-name {
+  grid-area: name;
+
+  font-family: "GoodTimes", sans-serif;
+  font-size: 13px;
+  line-height: 1.2;
+
+  color: #fff;
+}
+
+.region-member-location {
+  grid-area: location;
+
+  margin-top: 4px;
+
+  font-family: "GoodTimes", sans-serif;
+  font-size: 8px;
+  line-height: 1.2;
+
+  color: #999;
+}
+
+.region-member-platform {
+  grid-area: platform;
+
+  width: 28px;
+  height: 28px;
+
+  margin-left: 12px;
+
+  object-fit: contain;
+}
 
 /* =========================
    MOBILE
@@ -759,11 +755,13 @@ select {
 
   .map-container {
     position: relative;
+    display: block;
 
     width: 100%;
 
     margin-top: 30px;
   }
+
 
 
   /* =========================
@@ -773,11 +771,16 @@ select {
        the actual map and its pins.
        ========================= */
 
+  .map-visual,
+  .map-cards {
+    grid-area: auto;
+  }
+
   .map-visual {
     position: relative;
-
     width: 100%;
   }
+
 
   .world-map {
     display: block;
@@ -816,7 +819,7 @@ select {
 
     transform:
       translateX(-50%);
- 
+
     white-space: nowrap;
 
     font-family: "GoodTimes", sans-serif;
@@ -879,9 +882,14 @@ select {
   .form-card-stack {
     position: relative;
 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
     width: 100%;
     max-width: 410px;
   }
+
 
   .main-card-border {
     width: 100%;
@@ -971,13 +979,12 @@ select {
        ========================= */
 
   .submit-button {
-    position: absolute;
-
-    left: 20px;
-    bottom: -70px;
+    position: static;
 
     width: calc(100% - 40px);
     height: 70px;
+
+    margin: 0 20px;
 
     border-radius: 20px;
 
