@@ -24,6 +24,11 @@ const MapCards = ({ onUserCreated }) => {
     const handleChange = (event) => {
         const { name, value } = event.target;
 
+        const nextValue =
+        name === "username"
+            ? value.replace(/\s/g, "")
+            : value;
+
         setFormData((current) => ({
             ...current,
             [name]: value,
