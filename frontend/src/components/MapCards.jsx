@@ -114,7 +114,7 @@ const MapCards = ({ onUserCreated }) => {
                                 </label>
 
                                 <div className="form-sublabel">
-                                    @name not display name
+                                    @name not display name - {formData.username.length}/32
                                 </div>
 
                                 <input
@@ -123,6 +123,7 @@ const MapCards = ({ onUserCreated }) => {
                                     type="text"
                                     value={formData.username}
                                     onChange={handleChange}
+                                    maxLength={32}
                                     required
                                 />
                             </div>
