@@ -475,7 +475,7 @@ select {
     border: 2px solid #43c19a;
     border-radius: 14px;
   
-    background: rgba(9, 7, 38, 0.8);
+    background: rgba(9, 7, 38, 0.9);
   }
   
   .region-header {
@@ -555,6 +555,69 @@ select {
     cursor: pointer;
   
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.45);
+  }
+
+  .region-members {
+    display: flex;
+    flex-direction: column;
+  
+    padding: 0 14px 14px;
+  }
+  
+  .region-member {
+    display: grid;
+  
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "name platform"
+      "location platform";
+  
+    align-items: center;
+  
+    width: 100%;
+  
+    padding: 12px 0;
+  
+    box-sizing: border-box;
+  
+    border-bottom: 1px solid rgba(67, 193, 154, 0.35);
+  }
+  
+  .region-member:last-child {
+    border-bottom: none;
+  }
+
+  .region-member-name {
+    grid-area: name;
+  
+    font-family: "GoodTimes", sans-serif;
+    font-size: 13px;
+    line-height: 1.2;
+  
+    color: #fff;
+  }
+
+  .region-member-location {
+    grid-area: location;
+  
+    margin-top: 4px;
+  
+    font-family: "GoodTimes", sans-serif;
+    font-size: 8px;
+    line-height: 1.2;
+  
+    color: #999;
+  }
+
+  .region-member-platform {
+    grid-area: platform;
+  
+    width: 28px;
+    height: 28px;
+  
+    margin-left: 12px;
+  
+    object-fit: contain;
   }
 
 /* =========================

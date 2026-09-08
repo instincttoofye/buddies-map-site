@@ -11,6 +11,17 @@ const RegionDropdown = () => {
     const [regionMembers, setRegionMembers] = useState({});
     const [error, setError] = useState(null);
 
+    const platformIcons = {
+        PlayStation:
+            "https://cdn.discordapp.com/emojis/972881867525210152.webp?size=44",
+        Xbox:
+            "https://cdn.discordapp.com/emojis/980602666436685835.webp?size=44",
+        Switch:
+            "https://cdn.discordapp.com/emojis/980602666633822259.webp?size=44",
+        PC:
+            "https://cdn.discordapp.com/emojis/1511364070320766996.webp?size=44",
+    };
+
     useEffect(() => {
         const loadRegions = async () => {
             try {
@@ -105,10 +116,12 @@ const RegionDropdown = () => {
                                             {member.discord_username}
                                         </span>
 
-                                        {member.platform && (
-                                            <span className="region-member-platform">
-                                                {member.platform}
-                                            </span>
+                                        {member.platform && platformIcons[member.platform] && (
+                                            <img
+                                                className="region-member-platform"
+                                                src={platformIcons[member.platform]}
+                                                alt={member.platform}
+                                            />
                                         )}
 
                                         <span className="region-member-location">
