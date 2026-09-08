@@ -41,6 +41,14 @@ select {
   font-display: swap;
 }
 
+.form-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 410px;
+}
+
 .map-page {
   width: 100%;
   min-width: 1200px;
@@ -389,27 +397,29 @@ select {
 }
 
 .submit-button {
-  position: absolute;
-
-  left: 20px;
-  bottom: -70px;
+  position: static;
 
   width: calc(100% - 40px);
   height: 70px;
 
+  margin: 0 20px;
+
   border: none;
   border-radius: 20px;
 
-  background: linear-gradient(90deg,
-      #cf26ff 0%,
-      #43c19a 100%);
+  background: linear-gradient(
+    90deg,
+    #cf26ff 0%,
+    #43c19a 100%
+  );
 
   font-family: "GoodTimes", sans-serif;
   font-size: 42px;
   line-height: 1;
 
   color: #FFF;
-  filter: drop-shadow(0 2 3 #1a1a1a);
+
+  filter: drop-shadow(0 2px 3px #1a1a1a);
 
   cursor: pointer;
 
@@ -431,11 +441,11 @@ select {
 /* =========================
    REGION DROPDOWN
    ========================= */
-
    .region-dropdown {
-    width: 100%;
+    width: calc(100% - 40px);
     max-width: 410px;
-    margin-top: 32px;
+  
+    margin: 32px 20px 0;
   
     font-family: "GoodTimes", sans-serif;
   }
@@ -511,27 +521,29 @@ select {
   }
 
   .dropdown-button {
-    position: absolute;
-
-    left: 20px;
-    bottom: -170px;
+    position: static;
   
     width: calc(100% - 40px);
     height: 70px;
   
+    margin: 0 20px;
+  
     border: none;
     border-radius: 20px;
   
-    background: linear-gradient(90deg,
-        #cf26ff 0%,
-        #43c19a 100%);
+    background: linear-gradient(
+      90deg,
+      #cf26ff 0%,
+      #43c19a 100%
+    );
   
     font-family: "GoodTimes", sans-serif;
     font-size: 14px;
     line-height: 1;
   
     color: #FFF;
-    filter: drop-shadow(0 2 3 #1a1a1a);
+  
+    filter: drop-shadow(0 2px 3px #1a1a1a);
   
     cursor: pointer;
   
