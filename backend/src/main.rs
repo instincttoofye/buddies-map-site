@@ -7,7 +7,7 @@ use axum::{Router, http::Method, routing::get};
 
 use dotenvy::dotenv;
 use routes::map::{create_map_entry, get_map};
-use routes::stats::{get_server_stats, increment_member_count};
+use routes::stats::{get_server_stats, increment_member_count, decrement_member_count};
 use routes::regions::{get_regions, get_region_members};
 use sqlx::PgPool;
 use std::env;
@@ -44,6 +44,7 @@ async fn main() {
         .route("/map", get(get_map).post(create_map_entry))
         .route("/stats", get(get_server_stats))
         .route("/stats/member", axum::routing::post(increment_member_count))
+        .route("/stats/member/left", axum::routing::post(decrement_member_count))
         .route("/regions", get(get_regions))
         .route("/regions/{region}", get(get_region_members))
         .layer(cors)

@@ -76,3 +76,40 @@ pub async fn increment_member_count(
 
     Ok(Json(stats))
 }
+
+pub async fn decrement_member_count(
+    State(pool): State<PgPool>,
+) -> Result<Json<ServerStats>, (StatusCode, String)> {
+    info!("POST /stats/member/left - request received");
+
+    let stats = sqlx::query_as::<_, ServerStats>(
+        r#"
+        UPDATE server_stats
+        SET
+            member_count = member_count - 1,
+            updated_at = NOW()
+        WHERE id = 1
+        RETURNING member_count
+        "#,
+    )
+    .fetch_one(&pool)
+    .await
+    .map_err(|error| {
+        error!(
+            error = %error,
+            "POST /stats/member/left - failed to decrement member count"
+        );
+
+        (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            "Failed to decrement member count".to_string(),
+        )
+    })?;
+
+    info!(
+        member_count = stats.member_count,
+        "POST /stats/member/left - member count decremented successfully"
+    );
+
+    Ok(Json(stats))
+}
