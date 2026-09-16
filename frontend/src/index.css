@@ -95,7 +95,7 @@ select {
 
 .map-pin-icon {
   display: block;
-  width: 24px;
+  width: 18px;
   height: auto;
   transform: translateY(-100%);
   filter: drop-shadow(0 0 5px #000);
@@ -111,7 +111,7 @@ select {
   white-space: nowrap;
 
   font-family: "GoodTimes", sans-serif;
-  font-size: 6px;
+  font-size: 4px;
   color: #FFD700;
 
   filter: drop-shadow(0 0 2px #000);
@@ -803,8 +803,8 @@ select {
   .map-pin-icon {
     display: block;
 
-    width: 9px;
-    height: 8px;
+    width: 7px;
+    height: 6px;
 
     transform: translateY(-100%);
 
@@ -823,7 +823,7 @@ select {
     white-space: nowrap;
 
     font-family: "GoodTimes", sans-serif;
-    font-size: 2px;
+    font-size: 1.5px;
 
     color: #FFD700;
 
